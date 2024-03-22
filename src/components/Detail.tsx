@@ -19,7 +19,7 @@ const Detail = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <img
-            src={element?.bohr_model_image}
+            src={element?.image.url} //aratam ai cool ca orice kkt de electroinu de zici ca-i ochij
             alt={element?.name}
             style={{ width: "100%", height: "auto" }}
           />
@@ -28,21 +28,21 @@ const Detail = () => {
           <Grid container spacing={2}>
             <Grid item xs={2}>
               <Typography variant="body1">
-                <b>Appearence:</b>
+                <b>Name:</b>
               </Typography>
             </Grid>
             <Grid item xs={10}>
-              <TextField disabled={true} value={element?.appearance || ""} />
+              <TextField disabled={true} value={element?.name || ""} />
             </Grid>
             <Grid item xs={2}>
               <Typography variant="body1">
-                <b>Dicovered By:</b>
+                <b>Category:</b>
               </Typography>
             </Grid>
             <Grid item xs={10}>
               <TextField
                 disabled={true}
-                value={element?.discovered_by || ""}
+                value={element?.category || ""}
               ></TextField>
             </Grid>
           </Grid>

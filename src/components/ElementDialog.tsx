@@ -1,35 +1,47 @@
-import { Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { DogBreed } from "../model/Element";
-import useDogStore from "../stores/ElementStore";
-import ReactHookFormSelect from "./ReactHookFormSelect";
+import {} from "../model/Element";
+import useElementStore from "../stores/ElementStore";
 interface Inputs {
   name: string;
-  breed: DogBreed;
-  description: string;
-  imageUrl: string;
-  age: number;
-  owner: string;
+  appearance: string;
+  discovered_by: string;
+  named_by: string;
+  phase: string;
+  bohr_model_image: string;
+  summary: string;
+  category: string;
+  image: {
+    url: string;
+  };
 }
-const DogDialog = () => {
-  const { opened, handleClose, addDog, selectedDog, editDog } = useDogStore();
+
+const ElementDialog = () => {
+  const {
+    opened,
+    handleClose,
+    addElement,
+    editElement,
+    deleteElement,
+    selectedElement,
+  } = useElementStore();
   const { register, handleSubmit, control, reset } = useForm<Inputs>({});
 
   useEffect(() => {
-    reset(selectedDog);
-  }, [selectedDog]);
+    reset(selectedElement);
+  }, [selectedElement]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    if (selectedDog) {
-      editDog({
-        ...selectedDog,
+    if (selectedElement) {
+      editElement({
+        ...selectedElement,
         ...data,
       });
     } else {
-      addDog({
-        id: Math.floor(Math.random() * 1000),
+      addElement({
+        number: Math.floor(Math.random() * 1000),
         ...data,
       });
     }
@@ -58,49 +70,40 @@ const DogDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Description"
+              label="Appearance"
               fullWidth
-              {...register("description", { required: true })}
+              {...register("appearance", { required: true })}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Image URL"
+              label="Summary"
               fullWidth
-              {...register("imageUrl", { required: true })}
+              {...register("summary", { required: true })}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Age"
-              type="number"
+              label="Discovered by"
               fullWidth
-              {...register("age", { required: true })}
+              {...register("discovered_by", { required: true })}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Owner"
+              label="Named By:"
               fullWidth
-              {...register("owner", { required: true })}
+              {...register("named_by", { required: true })}
             />
           </Grid>
           <Grid item xs={12}>
-            <ReactHookFormSelect
-              label="Breed"
-              control={control}
-              defaultValue={""}
-              name={"breed"}
-            >
-              {Object.keys(DogBreed).map((breed) => {
-                const value = DogBreed[breed as keyof typeof DogBreed];
-                return (
-                  <MenuItem key={value} value={value}>
-                    {value}
-                  </MenuItem>
-                );
-              })}
-            </ReactHookFormSelect>
+            <Grid item xs={12}>
+              <TextField
+                label="Phase:"
+                fullWidth
+                {...register("phase", { required: true })}
+              />
+            </Grid>
           </Grid>
           <Grid item xs={12} display={"flex"} justifyContent={"flex-end"}>
             <Button variant="contained" type="submit" sx={{ mr: 2 }}>
@@ -116,4 +119,4 @@ const DogDialog = () => {
   );
 };
 
-export default DogDialog;
+export default ElementDialog;

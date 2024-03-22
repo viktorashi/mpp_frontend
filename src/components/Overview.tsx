@@ -15,12 +15,12 @@ import useDogStore from "../stores/ElementStore";
 
 const Overview = () => {
   const navigate = useNavigate();
-  const { dogs, deleteDog, handleOpen } = useDogStore();
+  const { elements, deleteElement, handleOpen } = useDogStore();
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} display={"flex"}>
         <Grid item xs={10}>
-          <Typography variant="h4">Dog Overview</Typography>
+          <Typography variant="h4">Mendeleev pe zona</Typography>
         </Grid>
         <Grid item xs={2}>
           <IconButton onClick={() => handleOpen()} aria-label="add">
@@ -28,29 +28,29 @@ const Overview = () => {
           </IconButton>
         </Grid>
       </Grid>
-      {dogs.map((dog) => (
-        <Grid key={dog.id} item xs={12} md={3}>
+      {elements.map((elem) => (
+        <Grid key={elem.number} item xs={12} md={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea onClick={() => navigate(`/dogs/${dog.id}`)}>
+            <CardActionArea onClick={() => navigate(`/dogs/${elem.number}`)}>
               <CardMedia
                 sx={{ height: 140 }}
-                image={dog.imageUrl}
-                title={dog.name}
+                image={elem.image.url}
+                title={elem.name}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {`${dog.name} - ${dog.breed}`}
+                  {`${elem.name} - ${elem.appearance}`}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {dog.description}
+                  {elem.summary}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" onClick={() => deleteDog(dog.id)}>
+              <Button size="small" onClick={() => deleteElement(elem.number)}>
                 Delete
               </Button>
-              <Button size="small" onClick={() => handleOpen(dog)}>
+              <Button size="small" onClick={() => handleOpen(elem)}>
                 Edit
               </Button>
             </CardActions>
