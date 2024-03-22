@@ -6,18 +6,18 @@ const AppRouter = () => {
   const Detail = lazy(() => import("./components/Detail"));
   return (
     <BrowserRouter>
-      <Suspense fallback={<></>}>
+      <Suspense fallback={<>stai boss ca se incarca</>}>
         <Routes>
-          <Route path="/" element={<Navigate replace to="/dogs" />} />
+          <Route path="/" element={<Navigate replace to="/elements" />} />
           <Route
             element={
               <Layout>
                 <Overview />
               </Layout>
             }
-            path={"/dogs"}
+            path={"/elements"}
           />
-          <Route element={<Detail />} path={"/dogs/:id"} />
+          <Route element={<Detail />} path={"/elements/:id"} />
         </Routes>
       </Suspense>
     </BrowserRouter>

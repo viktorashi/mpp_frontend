@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import useDogStore from "../stores/DogStore";
+import useDogStore from "../stores/ElementStore";
 
 const Overview = () => {
   const navigate = useNavigate();

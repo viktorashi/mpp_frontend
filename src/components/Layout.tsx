@@ -1,4 +1,4 @@
-import DogDialog from "./DogDialog";
+import DogDialog from "./ElementDialog";
 interface LayoutProps {
   children: React.ReactNode;
 }
