@@ -19,15 +19,9 @@ interface Inputs {
 }
 
 const ElementDialog = () => {
-  const {
-    opened,
-    handleClose,
-    addElement,
-    editElement,
-    deleteElement,
-    selectedElement,
-  } = useElementStore();
-  const { register, handleSubmit, control, reset } = useForm<Inputs>({});
+  const { opened, handleClose, addElement, editElement, selectedElement } =
+    useElementStore();
+  const { register, handleSubmit, reset } = useForm<Inputs>({});
 
   useEffect(() => {
     reset(selectedElement);
