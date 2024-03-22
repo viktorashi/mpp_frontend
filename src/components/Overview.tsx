@@ -31,7 +31,9 @@ const Overview = () => {
       {elements.map((elem) => (
         <Grid key={elem.number} item xs={12} md={3}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea onClick={() => navigate(`/dogs/${elem.number}`)}>
+            <CardActionArea
+              onClick={() => navigate(`/elements/${elem.number}`)}
+            >
               <CardMedia
                 sx={{ height: 140 }}
                 image={elem.image.url}
@@ -42,7 +44,7 @@ const Overview = () => {
                   {`${elem.name} - ${elem.appearance}`}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {elem.summary}
+                  {elem.category}
                 </Typography>
               </CardContent>
             </CardActionArea>
