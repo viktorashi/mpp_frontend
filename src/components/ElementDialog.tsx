@@ -13,9 +13,7 @@ interface Inputs {
   bohr_model_image: string;
   summary: string;
   category: string;
-  image: {
-    url: string;
-  };
+  image_url: string;
 }
 
 const ElementDialog = () => {
@@ -35,13 +33,15 @@ const ElementDialog = () => {
       });
     } else {
       addElement({
-        number: Math.floor(Math.random() * 1000),
+        number: Math.floor(Math.random() * 1000) + 119,
+        image: { url: data.image_url },
         ...data,
       });
     }
     reset();
     handleClose();
   };
+
   return (
     <Dialog
       open={opened}
@@ -53,7 +53,7 @@ const ElementDialog = () => {
       <form style={{ padding: 16 }} onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h5">Add a new dog</Typography>
+            <Typography variant="h5">Add a new element</Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -96,6 +96,15 @@ const ElementDialog = () => {
                 label="Phase:"
                 fullWidth
                 {...register("phase", { required: true })}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid item xs={12}>
+              <TextField
+                label="Image URL:"
+                fullWidth
+                {...register("image_url", { required: true })}
               />
             </Grid>
           </Grid>

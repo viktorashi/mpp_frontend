@@ -4,18 +4,23 @@ import ElementList from "../service/ElementApi";
 
 interface useElementStoreProps {
   opened: boolean;
+  elements: Element[];
+  selectedElement: Element;
+  setElements: (elements: Element[]) => void;
   handleOpen: (element?: Element) => void;
   handleClose: () => void;
-  elements: Element[];
   deleteElement: (elementId: number) => void;
   addElement: (element: Element) => void;
-  selectedElement: Element;
   editElement: (element: Element) => void;
+  resetElements: () => void;
 }
 
 const useElementStore = create<useElementStoreProps>((set) => ({
   opened: false,
   selectedElement: {} as Element,
+  elements: ElementList,
+  resetElements: () => set({ elements: ElementList }),
+  setElements: (elems: Element[]) => set({ elements: elems }),
   handleOpen: (element?: Element) =>
     set({ opened: true, selectedElement: element }),
   editElement: (element: Element) => {
@@ -26,7 +31,6 @@ const useElementStore = create<useElementStoreProps>((set) => ({
     }));
   },
   handleClose: () => set({ opened: false, selectedElement: {} as Element }),
-  elements: ElementList,
   addElement: (element: Element) =>
     set((state) => ({ elements: [...state.elements, element] })),
   deleteElement: (elementId: number) =>
