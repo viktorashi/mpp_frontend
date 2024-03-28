@@ -57,6 +57,7 @@ const ElementDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              data-testid="name"
               label="Name"
               fullWidth
               {...register("name", { required: true })}
@@ -64,6 +65,7 @@ const ElementDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              data-testid="appearance"
               label="Appearance"
               fullWidth
               {...register("appearance", { required: true })}
@@ -71,6 +73,7 @@ const ElementDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              data-testid="summary"
               label="Summary"
               fullWidth
               {...register("summary", { required: true })}
@@ -78,6 +81,7 @@ const ElementDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              data-testid="discovered-by"
               label="Discovered by"
               fullWidth
               {...register("discovered_by", { required: true })}
@@ -85,7 +89,8 @@ const ElementDialog = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Named By:"
+              data-testid="named-by"
+              label="Named By"
               fullWidth
               {...register("named_by", { required: true })}
             />
@@ -93,7 +98,8 @@ const ElementDialog = () => {
           <Grid item xs={12}>
             <Grid item xs={12}>
               <TextField
-                label="Phase:"
+                data-testid="phase"
+                label="Phase"
                 fullWidth
                 {...register("phase", { required: true })}
               />
@@ -102,14 +108,28 @@ const ElementDialog = () => {
           <Grid item xs={12}>
             <Grid item xs={12}>
               <TextField
-                label="Image URL:"
+                data-testid="image-url"
+                label="Image URL"
                 fullWidth
                 {...register("image_url", { required: true })}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                data-testid="category"
+                label="Category"
+                fullWidth
+                {...register("category", { required: true })}
+              />
+            </Grid>
           </Grid>
           <Grid item xs={12} display={"flex"} justifyContent={"flex-end"}>
-            <Button variant="contained" type="submit" sx={{ mr: 2 }}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{ mr: 2 }}
+              data-testid="submit"
+            >
               Submit
             </Button>
             <Button variant="outlined" onClick={handleClose}>

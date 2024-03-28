@@ -2,10 +2,13 @@ import { create } from "zustand";
 import Element from "../model/Element";
 import ElementList from "../service/ElementApi";
 
-interface useElementStoreProps {
+type State = {
   opened: boolean;
   elements: Element[];
   selectedElement: Element;
+};
+
+type Actions = {
   setElements: (elements: Element[]) => void;
   handleOpen: (element?: Element) => void;
   handleClose: () => void;
@@ -13,9 +16,9 @@ interface useElementStoreProps {
   addElement: (element: Element) => void;
   editElement: (element: Element) => void;
   resetElements: () => void;
-}
+};
 
-const useElementStore = create<useElementStoreProps>((set) => ({
+const useElementStore = create<State & Actions>((set) => ({
   opened: false,
   selectedElement: {} as Element,
   elements: ElementList,

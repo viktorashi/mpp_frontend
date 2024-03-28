@@ -1,4 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
+import { FC } from "react";
 import {
   Button,
   Card,
@@ -12,14 +13,23 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useElementStore from "../stores/ElementStore";
+import Element from "../model/Element";
 
-const Overview = () => {
+interface OverviewProps {
+  init_values?: Element[] | undefined;
+}
+
+const Overview: FC<OverviewProps> = ({ init_values }) => {
   const navigate = useNavigate();
+
   const { resetElements, setElements, elements, deleteElement, handleOpen } =
     useElementStore();
 
+  if (init_values) setElements(init_values);
+
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+
     if (value != "") {
       const filtered = elements.filter((elem) =>
         elem.name.toLocaleLowerCase().includes(value.toLowerCase())
@@ -40,7 +50,11 @@ const Overview = () => {
           <input type="text" onChange={handleFilter} />
         </Grid>
         <Grid item xs={2}>
-          <IconButton onClick={() => handleOpen()} aria-label="add">
+          <IconButton
+            onClick={() => handleOpen()}
+            aria-label="add"
+            title="add-button"
+          >
             <AddIcon />
           </IconButton>
         </Grid>
