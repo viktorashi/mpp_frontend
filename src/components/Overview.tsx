@@ -82,7 +82,11 @@ const Overview: FC<OverviewProps> = ({ init_values }) => {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" onClick={() => deleteElement(elem.number)}>
+                <Button
+                  size="small"
+                  data-testid="delete"
+                  onClick={() => deleteElement(elem.number)}
+                >
                   Delete
                 </Button>
                 <Button size="small" onClick={() => handleOpen(elem)}>

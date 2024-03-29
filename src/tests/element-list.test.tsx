@@ -1,28 +1,20 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { it, describe, expect } from "vitest";
 import App from "../App";
-import AppRouter from "../router";
-import elementList from "../service/ElementApi";
 
 describe("element list", async () => {
-  const { getByTitle, getByText } = render(<App />);
-
   //wait for it to render at first
-  it("adds to the list", async () => {
+  it("should add to the list", async () => {
+    const { getByTitle, getByTestId } = render(<App />);
+
     await waitFor(() => {
       fireEvent.click(getByTitle("add-button"));
     });
 
     const named = screen.getByTestId("name").querySelector("input");
     expect(named).toBeInTheDocument();
-    fireEvent.change(named!, { target: { value: "slobozium" } });
-    expect(named?.value, "input changed").toBe("slobozium");
+    fireEvent.change(named!, { target: { value: "marbleium" } });
+    expect(named?.value, "input changed").toBe("marbleium");
 
     const summary = screen.getByTestId("summary").querySelector("input");
     expect(summary).toBeInTheDocument();
@@ -67,28 +59,31 @@ describe("element list", async () => {
     expect(url?.value, "input changed").toBe(
       "https://video-images.vice.com/articles/6374b7b2b58b1ca5ef27c079/lede/1668594100659-oras-provincie-slobozia.jpeg?crop=1xw:1xh;center,center&resize=1200:*"
     );
-    fireEvent.click(getByText("Submit"));
+    await waitFor(() => {
+      fireEvent.click(getByTestId("submit"));
+    });
 
-    elementList.push({
-      number: Math.floor(Math.random() * 1000) + 119,
-      image: {
-        url: "https://video-images.vice.com/articles/6374b7b2b58b1ca5ef27c079/lede/1668594100659-oras-provincie-slobozia.jpeg?crop=1xw:1xh;center,center&resize=1200:*",
-      },
-      name: "slobozium",
-      appearance: "stii tu cum",
-      summary: "bun pentru ceapa",
-      discovered_by: "Badea Ioan",
-      named_by: "Dorel Adrian",
-      phase: "plasma",
-      bohr_model_image:
-        "https://video-images.vice.com/articles/6374b7b2b58b1ca5ef27c079/lede/1668594100659-oras-provincie-slobozia.jpeg?crop=1xw:1xh;center,center&resize=1200:*",
-      category: "ceva metal nu stiu",
+    expect(getByTitle("marbleium")).toBeInTheDocument();
+  });
+
+  it("should remove an element", async () => {
+    const { getAllByText, getByTitle, queryByTitle } = render(<App />);
+    let delete_buttons;
+    await waitFor(async () => {
+      delete_buttons = getAllByText("Delete");
     });
-    let container = null;
-    //n-am inteles cum se foloseste asta sincer DAR MI-A IEFIT HOLY MOTHER OF FUCKK
-    act(() => {
-      container = render(<AppRouter init_vaules={elementList} />);
-    });
-    expect(container).toMatchSnapshot();
+
+    expect(getByTitle("Ununennium")).toBeInTheDocument();
+
+    console.log(getByTitle("Ununennium"));
+    fireEvent.click(delete_buttons![0]);
+
+    expect(queryByTitle("Ununennium")).not.toBeInTheDocument();
+
+    console.log(delete_buttons!.length);
+    console.log(getAllByText("Delete").length);
+
+    expect(delete_buttons!.length).not.toEqual(getAllByText("Delete").length);
+    // expect(getByTitle("Ununennium")).not.toBeVisible();
   });
 });
