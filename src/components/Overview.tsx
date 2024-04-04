@@ -44,6 +44,15 @@ const Overview: FC<OverviewProps> = ({ init_values }) => {
     <Grid container spacing={2}>
       <Grid item xs={12} display={"flex"}>
         <Grid item xs={10}>
+          <Button
+            size="small"
+            data-testid="delete"
+            onClick={() => navigate("/chart")}
+          >
+            Go to chart
+          </Button>
+        </Grid>
+        <Grid item xs={10}>
           <Typography variant="h4">Mendeleev pe zona</Typography>
         </Grid>
         <Grid item xs={2}>

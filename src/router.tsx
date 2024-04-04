@@ -2,6 +2,8 @@ import { FC, Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Element from "./model/Element";
+import PieChartComponent from "./components/PieChartComp";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 interface AppRouterProps {
   init_vaules?: Element[] | undefined;
@@ -14,6 +16,14 @@ const AppRouter: FC<AppRouterProps> = ({ init_vaules }) => {
     <BrowserRouter>
       <Suspense fallback={<>stai boss ca se incarca</>}>
         <Routes>
+          <Route
+            path={"/chart"}
+            element={
+              <StyledEngineProvider injectFirst>
+                <PieChartComponent />
+              </StyledEngineProvider>
+            }
+          />
           <Route path="/" element={<Navigate replace to="/elements" />} />
           <Route
             element={

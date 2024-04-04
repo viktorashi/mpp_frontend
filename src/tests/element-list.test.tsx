@@ -1,9 +1,4 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { it, describe, expect } from "vitest";
 import App from "../App";
 
@@ -71,7 +66,7 @@ describe("element list", async () => {
     expect(getByTitle("marbleium")).toBeInTheDocument();
   });
 
-  it("should remove an element", async () => {
+  it("should delete an element", async () => {
     const { getAllByText, getByTitle, queryByTitle } = render(<App />);
     let delete_buttons;
     await waitFor(async () => {
@@ -80,7 +75,7 @@ describe("element list", async () => {
 
     expect(getByTitle("Ununennium")).toBeInTheDocument();
 
-    console.log(getByTitle("Ununennium"));
+    // console.log(getByTitle("Ununennium"));
     fireEvent.click(delete_buttons![0]);
 
     expect(queryByTitle("Ununennium")).not.toBeInTheDocument();
