@@ -15,8 +15,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.13",
     "@mui/material": "^5.15.13",
+<<<<<<< HEAD
     "@mui/x-charts": "^7.1.1",
     "axios": "^1.7.0",
+=======
+>>>>>>> parent of 1be1733 (added piechart)
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.1",

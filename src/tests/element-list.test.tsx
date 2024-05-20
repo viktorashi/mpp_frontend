@@ -1,4 +1,9 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import { it, describe, expect } from "vitest";
 import App from "../App";
 
@@ -10,7 +15,7 @@ describe("element list", async () => {
     await waitFor(() => {
       fireEvent.click(getByTitle("add-button"));
     });
-    //asta test doar sa vad daca mere gitu
+
     const named = screen.getByTestId("name").querySelector("input");
     expect(named).toBeInTheDocument();
     fireEvent.change(named!, { target: { value: "marbleium" } });
@@ -66,7 +71,7 @@ describe("element list", async () => {
     expect(getByTitle("marbleium")).toBeInTheDocument();
   });
 
-  it("should delete an element", async () => {
+  it("should remove an element", async () => {
     const { getAllByText, getByTitle, queryByTitle } = render(<App />);
     let delete_buttons;
     await waitFor(async () => {
@@ -75,7 +80,7 @@ describe("element list", async () => {
 
     expect(getByTitle("Ununennium")).toBeInTheDocument();
 
-    // console.log(getByTitle("Ununennium"));
+    console.log(getByTitle("Ununennium"));
     fireEvent.click(delete_buttons![0]);
 
     expect(queryByTitle("Ununennium")).not.toBeInTheDocument();
