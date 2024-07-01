@@ -1,5 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
-import { FC } from "react";
+import axios from "axios";
+import { FC, useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -22,7 +23,7 @@ interface OverviewProps {
 const Overview: FC<OverviewProps> = ({ init_values }) => {
   const navigate = useNavigate();
 
-  const { resetElements, setElements, elements, deleteElement, handleOpen } =
+  let { resetElements, setElements, elements, deleteElement, handleOpen } =
     useElementStore();
 
   if (init_values) setElements(init_values);
@@ -39,6 +40,23 @@ const Overview: FC<OverviewProps> = ({ init_values }) => {
       resetElements();
     }
   };
+
+  //daca nu merge as sa pui empty list
+  useEffect(() => {
+    let ignore =false;
+    axios.get("http://127.0.0.1:5000/getall").then((response) => {
+      if(!ignore)
+        // setElements(response.data as Element[]);
+        elements = response.data as Element[];
+        
+        console.log('astea sunt alea del e server')
+        console.log(elements)
+    });
+    return () => {
+      ignore= true;
+    };
+  }, [elements]);
+
 
   return (
     <Grid container spacing={2}>

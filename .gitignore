@@ -4,11 +4,14 @@ logs
 **/*.backup.*
 **/*.back.*
 
-node_modules
 ./bower_components
+./browser_components
 
 *.sublime*
 
 psd
 thumb
 sketch
+node_modules
+browser_components
+bower_components //idk

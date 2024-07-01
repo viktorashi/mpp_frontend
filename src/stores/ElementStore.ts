@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import Element from "../model/Element";
-import ElementList from "../service/ElementApi";
+// import ElementList from "../service/ElementApi";
 
 type State = {
   opened: boolean;
@@ -21,8 +21,8 @@ type Actions = {
 const useElementStore = create<State & Actions>((set) => ({
   opened: false,
   selectedElement: {} as Element,
-  elements: ElementList,
-  resetElements: () => set({ elements: ElementList }),
+  elements: [] as Element[],
+  resetElements: () => set({ elements: [] }),
   setElements: (elems: Element[]) => set({ elements: elems }),
   handleOpen: (element?: Element) =>
     set({ opened: true, selectedElement: element }),
